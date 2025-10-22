@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh mục - CTrading</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/portfolio.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2"><path d="M16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16C0 7.16344 7.16344 0 16 0Z" fill="#30D475"></path><path d="M19.8623 10.1377L15.9999 18.0628L12.1375 10.1377L4 12.086L15.9999 28L28 12.086L19.8623 10.1377Z" fill="white"></path></svg>
+                        CTrading
+                    </a>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="nav-link">
+                        <i class="fa-solid fa-border-all" aria-hidden="true"></i><span>Bảng điều khiển</span>
+                    </a>
+                    <a href="portfolio.html" class="nav-link active"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Danh mục</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i><span>Giao dịch</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-eye" aria-hidden="true"></i><span>Danh sách theo dõi</span></a>
+                    <a href="chatbot.html" class="nav-link"><i class="fa-solid fa-robot" aria-hidden="true"></i><span>Chat Bot</span></a>
+                    <a href="profile.html" class="nav-link"><i class="fa-solid fa-user" aria-hidden="true"></i><span>Hồ sơ</span></a>
+                    <a href="wallet.html" class="nav-link"><i class="fa-solid fa-wallet" aria-hidden="true"></i><span>Ví</span></a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                 <a href="login.html" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Đăng xuất</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div>
+                    <h1>Danh mục của tôi</h1>
+                    <p class="header-subtitle">Quản lý tài sản crypto của bạn</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="text" placeholder="Tìm kiếm coin...">
+                    </div>
+                    <button class="btn-icon">
+                        <i class="fa-solid fa-bell" aria-hidden="true"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/40?u=alexim" alt="User Avatar">
+                        <span>Alexim</span>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Portfolio Summary Cards -->
+            <section class="portfolio-summary">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h4>Tổng giá trị danh mục</h4>
+                        <p class="summary-value" id="total-portfolio-value">$0.00</p>
+                        <span class="summary-change positive" id="portfolio-change">+$0.00 (0.00%)</span>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h4>Tổng lợi nhuận/lỗ</h4>
+                        <p class="summary-value" id="total-pnl">$0.00</p>
+                        <span class="summary-change" id="pnl-percentage">0.00%</span>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h4>Số coin đang nắm giữ</h4>
+                        <p class="summary-value" id="total-coins">0</p>
+                        <span class="summary-change">Tài sản</span>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h4>Coin có giá trị cao nhất</h4>
+                        <p class="summary-value" id="best-performer">--</p>
+                        <span class="summary-change positive" id="best-performer-change">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Allocation Chart -->
+            <div class="portfolio-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-chart-pie text-purple"></i> Phân bổ danh mục</h3>
+                        <div class="time-filter">24h <i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="allocation-chart" id="allocation-chart">
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-chart-line text-green"></i> Hiệu suất 30 ngày</h3>
+                    </div>
+                    <div class="performance-chart" id="performance-chart">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Holdings Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-layer-group"></i> Tài sản đang nắm giữ</h3>
+                    <div class="table-filters">
+                        <button class="filter-btn active">Tất cả</button>
+                        <button class="filter-btn">Lợi nhuận</button>
+                        <button class="filter-btn">Lỗ</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="portfolio-table">
+                        <thead>
+                            <tr>
+                                <th>Tài sản</th>
+                                <th>Số lượng</th>
+                                <th>Giá mua TB</th>
+                                <th>Giá hiện tại</th>
+                                <th>Tổng giá trị</th>
+                                <th>Lợi nhuận/Lỗ</th>
+                                <th>% Danh mục</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="holdings-table"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử giao dịch</h3>
+                    <button class="btn-secondary">
+                        <i class="fa-solid fa-download"></i> Xuất CSV
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Loại</th>
+                                <th>Coin</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>Tổng</th>
+                                <th>Ghi chú</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-table">
+                            <tr><td colspan="8" class="placeholder">Chưa có giao dịch nào.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <!-- Custom JS -->
+    <script type="module" src="./portfolio/portfolio.tsx"></script>
+</body>
+</html>

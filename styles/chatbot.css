@@ -1,0 +1,7 @@
+.chatbot-placeholder {
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}

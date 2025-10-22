@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ví - CTrading</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/wallet.css">
+</head>
+<body>
+
+
+    
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2"><path d="M16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16C0 7.16344 7.16344 0 16 0Z" fill="#30D475"></path><path d="M19.8623 10.1377L15.9999 18.0628L12.1375 10.1377L4 12.086L15.9999 28L28 12.086L19.8623 10.1377Z" fill="white"></path></svg>
+                        CTrading
+                    </a>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="nav-link">
+                        <i class="fa-solid fa-border-all" aria-hidden="true"></i><span>Bảng điều khiển</span>
+                    </a>
+                    <a href="portfolio.html" class="nav-link"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Danh mục</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i><span>Giao dịch</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-eye" aria-hidden="true"></i><span>Danh sách theo dõi</span></a>
+                    <a href="chatbot.html" class="nav-link"><i class="fa-solid fa-robot" aria-hidden="true"></i><span>Chat Bot</span></a>
+                    <a href="profile.html" class="nav-link"><i class="fa-solid fa-user" aria-hidden="true"></i><span>Hồ sơ</span></a>
+                    <a href="wallet.html" class="nav-link active"><i class="fa-solid fa-wallet" aria-hidden="true"></i><span>Ví</span></a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                 <a href="login.html" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Đăng xuất</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div>
+                    <h1>Ví của tôi</h1>
+                    <p class="header-subtitle">Quản lý tài sản và giao dịch</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary" id="deposit-btn">
+                        <i class="fa-solid fa-arrow-down"></i> Nạp tiền
+                    </button>
+                    <button class="btn-secondary" id="withdraw-btn">
+                        <i class="fa-solid fa-arrow-up"></i> Rút tiền
+                    </button>
+                    <button class="btn-icon">
+                        <i class="fa-solid fa-bell" aria-hidden="true"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/40?u=alexim" alt="User Avatar">
+                        <span>Alexim</span>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Wallet Overview -->
+            <section class="wallet-overview">
+                <div class="balance-card">
+                    <div class="balance-header">
+                        <div>
+                            <p class="balance-label">Tổng số dư ước tính</p>
+                            <h2 class="balance-value" id="total-balance">$25,847.32</h2>
+                            <span class="balance-change positive">
+                                <i class="fa-solid fa-arrow-up"></i> +$1,234.56 (5.02%) hôm nay
+                            </span>
+                        </div>
+                        <button class="btn-toggle-balance">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="balance-actions">
+                        <button class="action-btn deposit">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Nạp</span>
+                        </button>
+                        <button class="action-btn withdraw">
+                            <i class="fa-solid fa-upload"></i>
+                            <span>Rút</span>
+                        </button>
+                        <button class="action-btn transfer">
+                            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                            <span>Chuyển</span>
+                        </button>
+                        <button class="action-btn convert">
+                            <i class="fa-solid fa-repeat"></i>
+                            <span>Chuyển đổi</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="wallet-stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Tổng tài sản</p>
+                            <h3 class="stat-value">12</h3>
+                            <span class="stat-change">Loại coin</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Lợi nhuận 24h</p>
+                            <h3 class="stat-value">+$1,234</h3>
+                            <span class="stat-change positive">+5.02%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Giao dịch hôm nay</p>
+                            <h3 class="stat-value">8</h3>
+                            <span class="stat-change">Hoàn thành</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wallet Tabs -->
+            <div class="wallet-tabs">
+                <button class="tab-btn active" data-tab="spot">
+                    <i class="fa-solid fa-wallet"></i> Ví Spot
+                </button>
+                <button class="tab-btn" data-tab="funding">
+                    <i class="fa-solid fa-building-columns"></i> Ví Funding
+                </button>
+                <button class="tab-btn" data-tab="earn">
+                    <i class="fa-solid fa-piggy-bank"></i> Ví Earn
+                </button>
+            </div>
+
+            <!-- Spot Wallet Content -->
+            <div class="tab-content active" data-content="spot">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-coins"></i> Tài sản Spot</h3>
+                        <div class="wallet-filters">
+                            <div class="search-bar">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" placeholder="Tìm kiếm coin..." id="search-coin">
+                            </div>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="hide-zero-balance">
+                                <span>Ẩn số dư 0</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="wallet-table">
+                            <thead>
+                                <tr>
+                                    <th>Coin</th>
+                                    <th>Tổng</th>
+                                    <th>Khả dụng</th>
+                                    <th>Đang chờ</th>
+                                    <th>Giá trị (USD)</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="spot-wallet-table">
+                                <tr><td colspan="6" class="placeholder">Đang tải dữ liệu...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Funding Wallet Content -->
+            <div class="tab-content" data-content="funding">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-building-columns"></i> Tài sản Funding</h3>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fa-solid fa-wallet"></i>
+                        <h3>Ví Funding trống</h3>
+                        <p>Chuyển tiền từ Ví Spot để bắt đầu</p>
+                        <button class="btn-primary">Chuyển tiền</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earn Wallet Content -->
+            <div class="tab-content" data-content="earn">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-piggy-bank"></i> Tài sản Earn</h3>
+                    </div>
+                    <div class="earn-products">
+                        <div class="earn-card">
+                            <div class="earn-header">
+                                <h4>Staking linh hoạt</h4>
+                                <span class="earn-badge">Phổ biến</span>
+                            </div>
+                            <p class="earn-desc">Kiếm lãi suất hấp dẫn với tài sản crypto của bạn</p>
+                            <div class="earn-stats">
+                                <div>
+                                    <span class="earn-label">APY lên đến</span>
+                                    <span class="earn-value">12.5%</span>
+                                </div>
+                                <div>
+                                    <span class="earn-label">Rút bất kỳ lúc nào</span>
+                                </div>
+                            </div>
+                            <button class="btn-secondary">Tìm hiểu thêm</button>
+                        </div>
+
+                        <div class="earn-card">
+                            <div class="earn-header">
+                                <h4>Staking có kỳ hạn</h4>
+                                <span class="earn-badge premium">Premium</span>
+                            </div>
+                            <p class="earn-desc">Lãi suất cao hơn với kỳ hạn cố định</p>
+                            <div class="earn-stats">
+                                <div>
+                                    <span class="earn-label">APY lên đến</span>
+                                    <span class="earn-value">25%</span>
+                                </div>
+                                <div>
+                                    <span class="earn-label">Kỳ hạn: 30-90 ngày</span>
+                                </div>
+                            </div>
+                            <button class="btn-secondary">Tìm hiểu thêm</button>
+                        </div>
+
+                        <div class="earn-card">
+                            <div class="earn-header">
+                                <h4>Liquidity Mining</h4>
+                                <span class="earn-badge new">Mới</span>
+                            </div>
+                            <p class="earn-desc">Cung cấp thanh khoản và nhận phần thưởng</p>
+                            <div class="earn-stats">
+                                <div>
+                                    <span class="earn-label">APY lên đến</span>
+                                    <span class="earn-value">50%</span>
+                                </div>
+                                <div>
+                                    <span class="earn-label">Rủi ro biến động</span>
+                                </div>
+                            </div>
+                            <button class="btn-secondary">Tìm hiểu thêm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Giao dịch gần đây</h3>
+                    <a href="#" class="btn-link">Xem tất cả</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Loại</th>
+                                <th>Coin</th>
+                                <th>Số lượng</th>
+                                <th>Trạng thái</th>
+                                <th>Thời gian</th>
+                                <th>TxID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-history">
+                            <tr>
+                                <td>
+                                    <span class="transaction-type deposit">
+                                        <i class="fa-solid fa-arrow-down"></i> Nạp
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="coin-info">
+                                        <img src="https://cdn.jsdelivr.net/gh/VadimMalykhin/binance-icons/crypto/btc.svg" alt="BTC" style="width: 24px; height: 24px;">
+                                        <span>BTC</span>
+                                    </div>
+                                </td>
+                                <td>0.025 BTC</td>
+                                <td><span class="status-badge success">Thành công</span></td>
+                                <td>2 giờ trước</td>
+                                <td><span class="tx-id">0x7a8f...3d2e</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="transaction-type withdraw">
+                                        <i class="fa-solid fa-arrow-up"></i> Rút
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="coin-info">
+                                        <img src="https://cdn.jsdelivr.net/gh/VadimMalykhin/binance-icons/crypto/eth.svg" alt="ETH" style="width: 24px; height: 24px;">
+                                        <span>ETH</span>
+                                    </div>
+                                </td>
+                                <td>1.5 ETH</td>
+                                <td><span class="status-badge pending">Đang xử lý</span></td>
+                                <td>5 giờ trước</td>
+                                <td><span class="tx-id">0x9b2c...8f1a</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="transaction-type transfer">
+                                        <i class="fa-solid fa-arrow-right-arrow-left"></i> Chuyển
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="coin-info">
+                                        <img src="https://cdn.jsdelivr.net/gh/VadimMalykhin/binance-icons/crypto/usdt.svg" alt="USDT" style="width: 24px; height: 24px;">
+                                        <span>USDT</span>
+                                    </div>
+                                </td>
+                                <td>5,000 USDT</td>
+                                <td><span class="status-badge success">Thành công</span></td>
+                                <td>1 ngày trước</td>
+                                <td><span class="tx-id">0x4e7b...6c9d</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div class="modal" id="depositModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Nạp tiền</h3>
+                    <button class="btn-close" id="close-deposit-modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="deposit-steps">
+                        <div class="step active">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Chọn coin</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Chọn mạng</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Địa chỉ</span>
+                        </div>
+                    </div>
+                    <div class="modal-form">
+                        <div class="form-group">
+                            <label>Chọn coin nạp</label>
+                            <select class="form-control" id="deposit-coin">
+                                <option value="">-- Chọn coin --</option>
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="USDT">Tether (USDT)</option>
+                                <option value="BNB">BNB</option>
+                            </select>
+                        </div>
+                        <div class="info-box">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <p>Chọn coin bạn muốn nạp vào ví. Địa chỉ nạp sẽ được hiển thị sau khi chọn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Rút tiền</h3>
+                    <button class="btn-close" id="close-withdraw-modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-form">
+                        <div class="form-group">
+                            <label>Chọn coin rút</label>
+                            <select class="form-control" id="withdraw-coin">
+                                <option value="">-- Chọn coin --</option>
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="USDT">Tether (USDT)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ rút</label>
+                            <input type="text" class="form-control" placeholder="0x..." id="withdraw-address">
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượng</label>
+                            <div class="input-with-max">
+                                <input type="number" class="form-control" placeholder="0.00" id="withdraw-amount">
+                                <button class="btn-max">MAX</button>
+                            </div>
+                            <small class="form-hint">Khả dụng: 0.025 BTC</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Mạng</label>
+                            <select class="form-control" id="withdraw-network">
+                                <option value="">-- Chọn mạng --</option>
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ERC20)</option>
+                                <option value="BSC">BSC (BEP20)</option>
+                            </select>
+                        </div>
+                        <div class="warning-box">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>Vui lòng kiểm tra kỹ địa chỉ và mạng trước khi rút. Giao dịch không thể hoàn tác!</p>
+                        </div>
+                        <button class="btn-primary btn-full">Xác nhận rút tiền</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script type="module" src="./wallet/wallet.tsx"></script>
+</body>
+</html>

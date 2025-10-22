@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển Crypto</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header">
+                    <a class="navbar-brand" href="#">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2"><path d="M16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16C0 7.16344 7.16344 0 16 0Z" fill="#30D475"></path><path d="M19.8623 10.1377L15.9999 18.0628L12.1375 10.1377L4 12.086L15.9999 28L28 12.086L19.8623 10.1377Z" fill="white"></path></svg>
+                        CTrading
+                    </a>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="nav-link active">
+                        <i class="fa-solid fa-border-all" aria-hidden="true"></i><span>Bảng điều khiển</span>
+                    </a>
+                    <a href="portfolio.html" class="nav-link"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Danh mục</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i><span>Giao dịch</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-eye" aria-hidden="true"></i><span>Danh sách theo dõi</span></a>
+                    <a href="chatbot.html" class="nav-link"><i class="fa-solid fa-robot" aria-hidden="true"></i><span>Chat Bot</span></a>
+                    <a href="profile.html" class="nav-link"><i class="fa-solid fa-user" aria-hidden="true"></i><span>Hồ sơ</span></a>
+                    <a href="wallet.html" class="nav-link"><i class="fa-solid fa-wallet" aria-hidden="true"></i><span>Ví</span></a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                 <a href="login.html" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Đăng xuất</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div>
+                    <h1>Bảng điều khiển</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="text" placeholder="Tìm kiếm coin...">
+                    </div>
+                    <button class="btn-icon">
+                        <i class="fa-solid fa-bell" aria-hidden="true"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/40?u=alexim" alt="User Avatar">
+                        <span>Alexim</span>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main dashboard grid -->
+            <main class="dashboard-grid">
+                <div class="card card-trending">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-fire-flame-curved text-orange" aria-hidden="true"></i> Xu hướng</h3>
+                        <a href="#">Xem tất cả</a>
+                    </div>
+                    <ul class="coin-list">
+                         <li class="placeholder">Đang tải dữ liệu...</li>
+                    </ul>
+                </div>
+
+                <div class="card card-recent">
+                     <div class="card-header">
+                        <h3><i class="fa-solid fa-hourglass-half text-blue" aria-hidden="true"></i> Mới thêm gần đây</h3>
+                        <a href="#">Xem tất cả</a>
+                    </div>
+                    <ul class="coin-list">
+                        <li class="placeholder">Đang tải dữ liệu...</li>
+                    </ul>
+                </div>
+
+                <div class="card card-top-coins">
+                    <div class="card-header">
+                        <h3>Coin hàng đầu</h3>
+                        <div class="time-filter">Toàn thời gian <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="top-coins-scroller" id="top-coins-scroller">
+                         <div class="placeholder">Đang tải dữ liệu...</div>
+                    </div>
+                <div class="scroller-nav">
+                    <button class="btn-icon" id="scroll-left-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="btn-icon" id="scroll-right-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                </div>
+            </main>
+
+            <!-- Market Statistics Section -->
+            <section class="market-stats-section">
+                <h2 class="section-title">Thống kê thị trường</h2>
+                
+                <!-- Market Overview Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Tổng khối lượng 24h</h4>
+                            <p class="stat-value" id="total-volume">$0</p>
+                            <span class="stat-change positive">Đang tải...</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Số coin giao dịch</h4>
+                            <p class="stat-value" id="total-coins">0</p>
+                            <span class="stat-change">Trên Binance</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Gainers (24h)</h4>
+                            <p class="stat-value" id="gainers-count">0</p>
+                            <span class="stat-change positive" id="top-gainer">--</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-arrow-trend-down"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>Losers (24h)</h4>
+                            <p class="stat-value" id="losers-count">0</p>
+                            <span class="stat-change negative" id="top-loser">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Gainers & Losers Table -->
+                <div class="market-movers-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-rocket text-green"></i> Top coin tăng nhiều nhất 24h</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="market-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Coin</th>
+                                        <th>Giá</th>
+                                        <th>Thay đổi 24h</th>
+                                        <th>Khối lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="gainers-table">
+                                    <tr><td colspan="5" class="placeholder">Đang tải...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-fire text-red"></i> Top coin giảm nhiều nhất 24h</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="market-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Coin</th>
+                                        <th>Giá</th>
+                                        <th>Thay đổi 24h</th>
+                                        <th>Khối lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="losers-table">
+                                    <tr><td colspan="5" class="placeholder">Đang tải...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Volume Leaders -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-chart-column text-purple"></i> Khối lượng giao dịch cao nhất</h3>
+                        <div class="time-filter">24h <i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="volume-leaders-grid" id="volume-leaders">
+                        <div class="placeholder">Đang tải dữ liệu...</div>
+                    </div>
+                </div>
+
+                <!-- Market Heatmap -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-table-cells text-blue"></i> Market Heatmap</h3>
+                    </div>
+                    <div class="heatmap-container" id="market-heatmap">
+                        <div class="placeholder">Đang tải dữ liệu...</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="coin-context-menu" id="coinContextMenu">
+        <div class="context-menu-item" data-action="watchlist">
+            <i class="fa-regular fa-star"></i>
+            <span>Theo dõi</span>
+        </div>
+        <div class="context-menu-item" data-action="trade">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            <span>Giao dịch</span>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, for components that need it) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Custom JS - Giả sử /dashboard/index.tsx là file chính -->
+    <script type="module" src="./dashboard/index.tsx"></script>
+</body>
+</html>

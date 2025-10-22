@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ sơ - CTrading</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/profile.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2"><path d="M16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16C0 7.16344 7.16344 0 16 0Z" fill="#30D475"></path><path d="M19.8623 10.1377L15.9999 18.0628L12.1375 10.1377L4 12.086L15.9999 28L28 12.086L19.8623 10.1377Z" fill="white"></path></svg>
+                        CTrading
+                    </a>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="nav-link">
+                        <i class="fa-solid fa-border-all" aria-hidden="true"></i><span>Bảng điều khiển</span>
+                    </a>
+                    <a href="portfolio.html" class="nav-link"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Danh mục</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i><span>Giao dịch</span></a>
+                    <a href="#" class="nav-link"><i class="fa-solid fa-eye" aria-hidden="true"></i><span>Danh sách theo dõi</span></a>
+                    <a href="chatbot.html" class="nav-link"><i class="fa-solid fa-robot" aria-hidden="true"></i><span>Chat Bot</span></a>
+                    <a href="profile.html" class="nav-link active"><i class="fa-solid fa-user" aria-hidden="true"></i><span>Hồ sơ</span></a>
+                    <a href="wallet.html" class="nav-link"><i class="fa-solid fa-wallet" aria-hidden="true"></i><span>Ví</span></a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                 <a href="login.html" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Đăng xuất</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div>
+                    <h1>Hồ sơ của tôi</h1>
+                    <p class="header-subtitle">Quản lý thông tin cá nhân và cài đặt tài khoản</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-icon">
+                        <i class="fa-solid fa-bell" aria-hidden="true"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/40?u=alexim" alt="User Avatar">
+                        <span>Alexim</span>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Profile Content -->
+            <div class="profile-container">
+                <!-- Profile Header Card -->
+                <div class="profile-header-card">
+                    <div class="profile-cover">
+                        <button class="btn-edit-cover">
+                            <i class="fa-solid fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="profile-info-header">
+                        <div class="profile-avatar-wrapper">
+                            <img src="https://i.pravatar.cc/150?u=alexim" alt="Avatar" class="profile-avatar">
+                            <button class="btn-edit-avatar">
+                                <i class="fa-solid fa-camera"></i>
+                            </button>
+                        </div>
+                        <div class="profile-meta">
+                            <h2>Alexim</h2>
+                            <p class="profile-email">alexim@example.com</p>
+                            <div class="profile-badges">
+                                <span class="badge badge-verified">
+                                    <i class="fa-solid fa-circle-check"></i> Đã xác minh
+                                </span>
+                                <span class="badge badge-premium">
+                                    <i class="fa-solid fa-crown"></i> Premium
+                                </span>
+                            </div>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">42</span>
+                                <span class="stat-label">Giao dịch</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">15</span>
+                                <span class="stat-label">Theo dõi</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">8</span>
+                                <span class="stat-label">Tháng</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Content Grid -->
+                <div class="profile-grid">
+                    <!-- Left Column -->
+                    <div class="profile-left">
+                        <!-- Personal Information -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-id-card"></i> Thông tin cá nhân</h3>
+                                <button class="btn-secondary" id="edit-personal-btn">
+                                    <i class="fa-solid fa-pen"></i> Chỉnh sửa
+                                </button>
+                            </div>
+                            <div class="profile-form">
+                                <div class="form-group">
+                                    <label>Họ và tên</label>
+                                    <input type="text" class="form-control" value="Alexim Nguyen" disabled id="fullname">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <div class="input-with-badge">
+                                        <input type="email" class="form-control" value="alexim@example.com" disabled id="email">
+                                        <span class="verified-badge"><i class="fa-solid fa-circle-check"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <div class="input-with-badge">
+                                        <input type="tel" class="form-control" value="+84 901 234 567" disabled id="phone">
+                                        <span class="verified-badge"><i class="fa-solid fa-circle-check"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ngày sinh</label>
+                                    <input type="date" class="form-control" value="1995-06-15" disabled id="birthdate">
+                                </div>
+                                <div class="form-group">
+                                    <label>Quốc gia</label>
+                                    <select class="form-control" disabled id="country">
+                                        <option>Việt Nam</option>
+                                        <option>United States</option>
+                                        <option>Singapore</option>
+                                    </select>
+                                </div>
+                                <div class="form-actions" style="display: none;" id="personal-actions">
+                                    <button class="btn-secondary" id="cancel-personal-btn">Hủy</button>
+                                    <button class="btn-primary" id="save-personal-btn">Lưu thay đổi</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Settings -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-shield-halved"></i> Bảo mật</h3>
+                            </div>
+                            <div class="security-list">
+                                <div class="security-item">
+                                    <div class="security-info">
+                                        <i class="fa-solid fa-lock"></i>
+                                        <div>
+                                            <h4>Mật khẩu</h4>
+                                            <p>Thay đổi lần cuối: 2 tháng trước</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn-link">Thay đổi</button>
+                                </div>
+                                <div class="security-item">
+                                    <div class="security-info">
+                                        <i class="fa-solid fa-mobile-screen"></i>
+                                        <div>
+                                            <h4>Xác thực 2 yếu tố (2FA)</h4>
+                                            <p class="text-success">Đã bật</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn-link">Quản lý</button>
+                                </div>
+                                <div class="security-item">
+                                    <div class="security-info">
+                                        <i class="fa-solid fa-key"></i>
+                                        <div>
+                                            <h4>API Keys</h4>
+                                            <p>3 keys đang hoạt động</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn-link">Xem</button>
+                                </div>
+                                <div class="security-item">
+                                    <div class="security-info">
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                        <div>
+                                            <h4>Lịch sử đăng nhập</h4>
+                                            <p>Lần cuối: Hôm nay, 10:30 AM</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn-link">Xem chi tiết</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="profile-right">
+                        <!-- Account Verification -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-certificate"></i> Xác minh tài khoản</h3>
+                            </div>
+                            <div class="verification-status">
+                                <div class="verification-item completed">
+                                    <div class="verification-icon">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+                                    <div class="verification-info">
+                                        <h4>Email</h4>
+                                        <p>Đã xác minh</p>
+                                    </div>
+                                </div>
+                                <div class="verification-item completed">
+                                    <div class="verification-icon">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+                                    <div class="verification-info">
+                                        <h4>Số điện thoại</h4>
+                                        <p>Đã xác minh</p>
+                                    </div>
+                                </div>
+                                <div class="verification-item completed">
+                                    <div class="verification-icon">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+                                    <div class="verification-info">
+                                        <h4>KYC Level 1</h4>
+                                        <p>Đã hoàn thành</p>
+                                    </div>
+                                </div>
+                                <div class="verification-item pending">
+                                    <div class="verification-icon">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </div>
+                                    <div class="verification-info">
+                                        <h4>KYC Level 2</h4>
+                                        <p>Chưa hoàn thành</p>
+                                    </div>
+                                    <button class="btn-link">Bắt đầu</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preferences -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-sliders"></i> Tùy chỉnh</h3>
+                            </div>
+                            <div class="preferences-list">
+                                <div class="preference-item">
+                                    <div class="preference-info">
+                                        <h4>Giao diện tối</h4>
+                                        <p>Tự động theo hệ thống</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="dark-mode-toggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="preference-item">
+                                    <div class="preference-info">
+                                        <h4>Thông báo Email</h4>
+                                        <p>Nhận cập nhật về giao dịch</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="preference-item">
+                                    <div class="preference-info">
+                                        <h4>Thông báo Push</h4>
+                                        <p>Thông báo biến động giá</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="preference-item">
+                                    <div class="preference-info">
+                                        <h4>Ngôn ngữ</h4>
+                                        <p>Tiếng Việt</p>
+                                    </div>
+                                    <select class="form-select-sm">
+                                        <option selected>Tiếng Việt</option>
+                                        <option>English</option>
+                                        <option>中文</option>
+                                    </select>
+                                </div>
+                                <div class="preference-item">
+                                    <div class="preference-info">
+                                        <h4>Đơn vị tiền tệ</h4>
+                                        <p>USD</p>
+                                    </div>
+                                    <select class="form-select-sm">
+                                        <option selected>USD</option>
+                                        <option>VND</option>
+                                        <option>EUR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity Summary -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-simple"></i> Hoạt động gần đây</h3>
+                                <a href="#" class="btn-link">Xem tất cả</a>
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon green">
+                                        <i class="fa-solid fa-arrow-up"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h4>Mua BTC</h4>
+                                        <p>2 giờ trước</p>
+                                    </div>
+                                    <span class="activity-amount positive">+0.025 BTC</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon red">
+                                        <i class="fa-solid fa-arrow-down"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h4>Bán ETH</h4>
+                                        <p>5 giờ trước</p>
+                                    </div>
+                                    <span class="activity-amount negative">-1.5 ETH</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon blue">
+                                        <i class="fa-solid fa-wallet"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h4>Nạp tiền</h4>
+                                        <p>1 ngày trước</p>
+                                    </div>
+                                    <span class="activity-amount">$5,000</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon green">
+                                        <i class="fa-solid fa-arrow-up"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h4>Mua SOL</h4>
+                                        <p>2 ngày trước</p>
+                                    </div>
+                                    <span class="activity-amount positive">+25 SOL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script type="module" src="./profile/profile.tsx"></script>
+</body>
+</html>
