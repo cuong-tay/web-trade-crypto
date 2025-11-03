@@ -40,10 +40,19 @@ export interface Trade {
 }
 
 export interface Position {
+  id: string;
   symbol: Symbol;
-  quantity: number;
+  side: 'LONG' | 'SHORT';
+  size: number;
   entryPrice: number;
-  pnl: number;
+  markPrice: number;
+  leverage: number;
+  margin: number;
+  unrealizedPnL: number;
+  liquidationPrice: number;
+  timestamp: number;
+  takeProfit?: number;
+  stopLoss?: number;
 }
 
 export interface TradingState {
@@ -62,5 +71,8 @@ export interface TradingContextType extends TradingState {
   setSymbol: (symbol: Symbol) => void;
   setInterval: (interval: Interval) => void;
   placeOrder: (order: Omit<Order, 'id' | 'timestamp'>) => void;
+  openPosition: (position: Omit<Position, 'id' | 'timestamp' | 'markPrice' | 'unrealizedPnL'>) => void;
+  closePosition: (positionId: string) => void;
+  updatePositionTPSL: (positionId: string, takeProfit?: number, stopLoss?: number) => void;
   setLastPrice: (price: number) => void;
 }

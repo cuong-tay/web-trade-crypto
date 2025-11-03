@@ -34,16 +34,37 @@ export const useTradingState = () => {
       };
       setTrades(prev => [newTrade, ...prev]);
 
-      // Update balance
+      // Update balance (chỉ cho Spot)
       const cost = newTrade.price * newTrade.quantity;
       if (newTrade.side === 'buy') {
         setBalance(prev => prev - cost);
       } else {
         setBalance(prev => prev + cost);
       }
-      
-      // NOTE: Position management is simplified and not fully implemented
     }
+  }, []);
+
+  const openPosition = useCallback((position: Omit<Position, 'id' | 'timestamp' | 'markPrice' | 'unrealizedPnL'>) => {
+    const newPosition: Position = {
+      ...position,
+      id: generateId(),
+      timestamp: Date.now(),
+      markPrice: position.entryPrice, // Initialize with entry price
+      unrealizedPnL: 0, // Start with 0 PnL
+    };
+    setPositions(prev => [...prev, newPosition]);
+  }, []);
+
+  const closePosition = useCallback((positionId: string) => {
+    setPositions(prev => prev.filter(p => p.id !== positionId));
+  }, []);
+
+  const updatePositionTPSL = useCallback((positionId: string, takeProfit?: number, stopLoss?: number) => {
+    setPositions(prev => prev.map(p => 
+      p.id === positionId 
+        ? { ...p, takeProfit, stopLoss }
+        : p
+    ));
   }, []);
 
   return {
@@ -58,6 +79,9 @@ export const useTradingState = () => {
     positions,
     balance,
     placeOrder,
+    openPosition,
+    closePosition,
+    updatePositionTPSL,
     lastPrice,
     setLastPrice,
   };

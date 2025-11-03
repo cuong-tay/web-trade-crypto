@@ -44,3 +44,634 @@
   overflow: hidden;
   height: 100%;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #131722;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #363c4f;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a5163;
+}
+
+/* Scrollbar for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #363c4f #131722;
+}
+
+/* Order Panel Styles */
+.order-panel {
+  background: #1e222d;
+  padding: 1rem;
+  border-radius: 4px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.order-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.order-panel::-webkit-scrollbar-track {
+  background: #131722;
+}
+
+.order-panel::-webkit-scrollbar-thumb {
+  background: #363c4f;
+  border-radius: 3px;
+}
+
+.order-panel::-webkit-scrollbar-thumb:hover {
+  background: #4a5163;
+}
+
+/* Order Panel Header */
+.order-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.order-panel-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #d1d4dc;
+}
+
+.trading-pair {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Order Side Tabs */
+.order-side-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.order-side-tabs button {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s;
+  background: #2a2e39;
+  color: #888;
+}
+
+.order-side-tabs button.active.buy {
+  background: rgba(38, 166, 154, 0.2);
+  border-color: #26a69a;
+  color: #26a69a;
+}
+
+.order-side-tabs button.active.sell {
+  background: rgba(239, 83, 80, 0.2);
+  border-color: #ef5350;
+  color: #ef5350;
+}
+
+/* Input Groups */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  background: #131722;
+  color: #d1d4dc;
+  border: 1px solid #2a2e39;
+  padding: 0.5rem;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #26a69a;
+}
+
+/* Balance Info */
+.balance-info {
+  background: #131722;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance-info span:first-child {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.balance-amount {
+  font-size: 0.9rem;
+  color: #26a69a;
+  font-weight: 600;
+}
+
+/* Wallet Details */
+.wallet-details {
+  margin-bottom: 1rem;
+}
+
+.wallet-details summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #888;
+  padding: 0.5rem;
+  background: #131722;
+  border-radius: 4px;
+  user-select: none;
+  list-style: none;
+}
+
+.wallet-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.wallet-details summary::after {
+  content: '▼';
+  float: right;
+  font-size: 0.7rem;
+  transition: transform 0.3s;
+}
+
+.wallet-details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.wallet-detail-content {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: #131722;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.wallet-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.wallet-row:last-child {
+  margin-bottom: 0;
+}
+
+.wallet-row span:first-child {
+  color: #888;
+}
+
+/* Percentage Buttons */
+.percentage-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-percentage {
+  padding: 0.4rem;
+  background: #2a2e39;
+  border: 1px solid #363c4f;
+  color: #888;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn-percentage:hover {
+  border-color: #26a69a;
+  color: #26a69a;
+}
+
+/* Submit Button */
+.btn-submit {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-submit.btn-buy {
+  background: #26a69a;
+}
+
+.btn-submit.btn-buy:hover {
+  background: #2eb89d;
+}
+
+.btn-submit.btn-sell {
+  background: #ef5350;
+}
+
+.btn-submit.btn-sell:hover {
+  background: #f25c59;
+}
+
+.btn-submit:disabled {
+  background: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Fee Info */
+.fee-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #2a2e39;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Leverage Control */
+.leverage-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #2a2e39;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.leverage-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #26a69a;
+  cursor: pointer;
+}
+
+.leverage-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #26a69a;
+  cursor: pointer;
+  border: none;
+}
+
+/* Leverage Quick Buttons */
+.leverage-quick-buttons {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.leverage-quick-btn {
+  flex: 1;
+  padding: 0.3rem;
+  background: #2a2e39;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+.leverage-quick-btn.active {
+  background: #26a69a;
+  color: white;
+  font-weight: 600;
+}
+
+.leverage-quick-btn:hover {
+  background: #363c4f;
+}
+
+/* Leverage Warning */
+.leverage-warning {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 152, 0, 0.1);
+  border-left: 3px solid #ff9800;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #ff9800;
+}
+
+/* Position Card */
+.position-card {
+  background: #131722;
+  border-radius: 6px;
+  padding: 0.75rem;
+  border-left: 4px solid;
+  margin-bottom: 0.75rem;
+}
+
+.position-card.long {
+  border-left-color: #26a69a;
+  border: 1px solid #26a69a;
+}
+
+.position-card.short {
+  border-left-color: #ef5350;
+  border: 1px solid #ef5350;
+}
+
+.position-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.position-symbol {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #d1d4dc;
+}
+
+.position-badge {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.position-badge.long {
+  background: rgba(38, 166, 154, 0.2);
+  color: #26a69a;
+}
+
+.position-badge.short {
+  background: rgba(239, 83, 80, 0.2);
+  color: #ef5350;
+}
+
+.position-close-btn {
+  padding: 0.3rem 0.75rem;
+  background: transparent;
+  border: 1px solid #ef5350;
+  color: #ef5350;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.position-close-btn:hover {
+  background: #ef5350;
+  color: white;
+}
+
+.position-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.position-field {
+  margin-bottom: 0.25rem;
+}
+
+.position-field-label {
+  color: #888;
+  margin-bottom: 0.25rem;
+}
+
+.position-field-value {
+  color: #d1d4dc;
+  font-weight: 500;
+}
+
+.position-pnl {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.position-pnl.positive {
+  color: #26a69a;
+}
+
+.position-pnl.negative {
+  color: #ef5350;
+}
+
+.position-footer {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #2a2e39;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+/* Tabs */
+.trades-tabs {
+  display: flex;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #2a2e39;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.tab-button.active {
+  background: #363c4f;
+  border-bottom-color: #26a69a;
+  color: #d1d4dc;
+  font-weight: 600;
+}
+
+.tab-button:hover {
+  color: #d1d4dc;
+}
+
+/* TP/SL Section */
+.tpsl-section {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #2a2e39;
+  font-size: 0.8rem;
+}
+
+.tpsl-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tpsl-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.tpsl-input-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #888;
+  font-size: 0.75rem;
+}
+
+.tpsl-input {
+  width: 100%;
+  padding: 0.4rem;
+  background: #1e222d;
+  border: 1px solid #2a2e39;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #d1d4dc;
+}
+
+.tpsl-input.tp {
+  color: #26a69a;
+}
+
+.tpsl-input.sl {
+  color: #ef5350;
+}
+
+.tpsl-input:focus {
+  outline: none;
+  border-color: #26a69a;
+}
+
+.tpsl-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tpsl-confirm-btn {
+  flex: 1;
+  padding: 0.4rem;
+  background: #26a69a;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tpsl-confirm-btn:hover {
+  background: #2eb89d;
+}
+
+.tpsl-cancel-btn {
+  flex: 1;
+  padding: 0.4rem;
+  background: #2a2e39;
+  border: none;
+  border-radius: 4px;
+  color: #888;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tpsl-cancel-btn:hover {
+  background: #363c4f;
+  color: #d1d4dc;
+}
+
+.tpsl-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tpsl-values {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tpsl-value-item {
+  flex: 1;
+}
+
+.tpsl-label {
+  color: #888;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.tpsl-value {
+  font-weight: 500;
+}
+
+.tpsl-value.tp {
+  color: #26a69a;
+}
+
+.tpsl-value.sl {
+  color: #ef5350;
+}
+
+.tpsl-value.unset {
+  color: #888;
+}
+
+.tpsl-edit-btn {
+  width: 100%;
+  padding: 0.4rem;
+  background: #2a2e39;
+  border: 1px solid #363c4f;
+  border-radius: 4px;
+  color: #d1d4dc;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tpsl-edit-btn:hover {
+  background: #363c4f;
+  border-color: #26a69a;
+}
