@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lí Giao Dịch - Admin CTrading</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../styles/admin.css">
+</head>
+<body>
+
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                        <path d="M16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16C0 7.16344 7.16344 0 16 0Z" fill="#30D475"></path>
+                        <path d="M19.8623 10.1377L15.9999 18.0628L12.1375 10.1377L4 12.086L15.9999 28L28 12.086L19.8623 10.1377Z" fill="white"></path>
+                    </svg>
+                    <span>CTrading Admin</span>
+                </div>
+                <nav class="admin-nav">
+                    <a href="../admin-dashboard.html" class="nav-link">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../users/user-management.html" class="nav-link">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Quản Lí User</span>
+                    </a>
+                    <a href="transaction-management.html" class="nav-link active">
+                        <i class="fa-solid fa-receipt"></i>
+                        <span>Quản Lí Giao Dịch</span>
+                    </a>
+                    <a href="../reports/reports.html" class="nav-link">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Báo Cáo & Thống Kê</span>
+                    </a>
+                    <a href="../settings/settings.html" class="nav-link">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Cài Đặt Hệ Thống</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                <a href="../../index.html" class="nav-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Về Dashboard User</span>
+                </a>
+                <a href="../../login.html" class="nav-link" id="logout-btn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1><i class="fa-solid fa-receipt me-2"></i> Quản Lí Giao Dịch</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn-icon">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <div class="admin-profile">
+                        <img src="https://i.pravatar.cc/40?u=admin" alt="Admin">
+                        <div class="profile-info">
+                            <p class="profile-name" id="admin-name">Admin</p>
+                            <small>Administrator</small>
+                        </div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Admin Content -->
+            <main class="admin-content">
+                <!-- Transaction Stats -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h4>Tổng Giao Dịch</h4>
+                            <p class="stat-value" id="total-transactions">0</p>
+                            <span class="stat-change">Tất cả giao dịch</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h4>Tổng Khối Lượng</h4>
+                            <p class="stat-value" id="total-volume">$0</p>
+                            <span class="stat-change positive">Tổng giá trị GD</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h4>Tổng Phí (Fee)</h4>
+                            <p class="stat-value" id="total-fee">$0</p>
+                            <span class="stat-change">Thu nhập từ fee</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-purple">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h4>GD Hôm Nay</h4>
+                            <p class="stat-value" id="today-transactions">0</p>
+                            <span class="stat-change">Giao dịch hôm nay</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters & Search -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-filter"></i> Tìm Kiếm & Lọc</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Tìm kiếm</label>
+                                <input type="text" class="form-control" id="search-input" placeholder="User email, Transaction ID...">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Loại GD</label>
+                                <select class="form-select" id="type-filter">
+                                    <option value="">Tất cả</option>
+                                    <option value="buy">Mua (Buy)</option>
+                                    <option value="sell">Bán (Sell)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Coin</label>
+                                <select class="form-select" id="coin-filter">
+                                    <option value="">Tất cả</option>
+                                    <option value="BTC">BTC</option>
+                                    <option value="ETH">ETH</option>
+                                    <option value="BNB">BNB</option>
+                                    <option value="SOL">SOL</option>
+                                    <option value="ADA">ADA</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Từ Ngày</label>
+                                <input type="date" class="form-control" id="from-date">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Đến Ngày</label>
+                                <input type="date" class="form-control" id="to-date">
+                            </div>
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button class="btn btn-primary w-100" id="apply-filter-btn">
+                                    <i class="fa-solid fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transactions Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-list"></i> Danh Sách Giao Dịch</h3>
+                        <button class="btn btn-sm btn-outline-primary" id="export-btn">
+                            <i class="fa-solid fa-download me-2"></i>Export CSV
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User</th>
+                                    <th>Loại</th>
+                                    <th>Coin</th>
+                                    <th>Số Lượng</th>
+                                    <th>Giá</th>
+                                    <th>Tổng Tiền</th>
+                                    <th>Phí (Fee)</th>
+                                    <th>Thời Gian</th>
+                                    <th>Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-table-body">
+                                <tr><td colspan="10" class="text-center py-4">Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div>
+                            <span id="showing-text">Showing 0-0 of 0</span>
+                        </div>
+                        <div class="pagination" id="pagination">
+                            <!-- Pagination will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Transaction Detail Modal -->
+    <div class="modal fade" id="transactionDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa-solid fa-receipt me-2"></i>Chi Tiết Giao Dịch</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="transaction-detail-content">
+                    <!-- Transaction details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Transactions Script -->
+    <script type="module" src="./transactions.tsx"></script>
+</body>
+</html>

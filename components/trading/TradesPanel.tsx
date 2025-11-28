@@ -1,16 +1,60 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTradingContext } from '../../context/TradingContext';
 import { Position } from '../../types';
+import { TradingService, type Trade } from '../../services/tradingService';
 
 const TradesPanel: React.FC = () => {
-  const { trades, marketType, lastPrice, symbol, positions, closePosition: contextClosePosition, updatePositionTPSL } = useTradingContext();
-  const [activeTab, setActiveTab] = useState<'trades' | 'positions'>('positions');
+  const { trades: contextTrades, marketType, lastPrice, symbol, positions, closePosition: contextClosePosition, updatePositionTPSL } = useTradingContext();
+  const [activeTab, setActiveTab] = useState<'positions' | 'orders'>('positions');
   const [editingPosition, setEditingPosition] = useState<string | null>(null);
   const [tpValue, setTpValue] = useState<string>('');
   const [slValue, setSlValue] = useState<string>('');
   
+  // API trades state (Spot)
+  const [apiTrades, setApiTrades] = useState<Trade[]>([]);
+  const [loadingTrades, setLoadingTrades] = useState(false);
+  
   const isFutures = marketType === 'futures';
+  
+  // Fetch Spot trades from API khi symbol thay đổi
+  useEffect(() => {
+    const fetchTrades = async () => {
+      if (isFutures) return; // Chỉ fetch API trades cho Spot trading
+      
+      setLoadingTrades(true);
+      try {
+        console.log('📊 Fetching trades for symbol:', symbol);
+        const tradesData = await TradingService.getTrades(symbol, 50, 0);
+        console.log('✅ Trades fetched:', tradesData);
+        setApiTrades(tradesData);
+      } catch (error) {
+        console.error('❌ Error fetching trades:', error);
+        // Fallback to context trades on error - map to TradingService Trade type
+        const now = new Date().toISOString();
+        const mappedTrades = (contextTrades || []).map((t: any) => ({
+          id: t.id || `trade-${Date.now()}`,
+          order_id: t.order_id || '',
+          symbol: t.symbol,
+          side: t.side?.toUpperCase() || 'BUY',
+          price: t.price,
+          quantity: t.quantity || t.amount || 0,
+          total: t.total || (t.price * (t.quantity || t.amount || 0)),
+          fee: t.fee || 0,
+          fee_asset: t.fee_asset || 'USDT',
+          executed_at: t.timestamp ? new Date(t.timestamp).toISOString() : now,
+          created_at: now,
+        })) as Trade[];
+        setApiTrades(mappedTrades);
+      } finally {
+        setLoadingTrades(false);
+      }
+    };
+    
+    fetchTrades();
+    
+    fetchTrades();
+  }, [symbol, isFutures, contextTrades]);
   
   const panelStyle: React.CSSProperties = {
     background: '#1e222d',
@@ -36,83 +80,53 @@ const TradesPanel: React.FC = () => {
   });
 
   const closePosition = (positionId: string) => {
-    if (confirm('Bạn có chắc muốn đóng vị thế này?')) {
-      const position = positions.find(p => p.id === positionId);
+    if (!confirm('Bạn có chắc muốn đóng vị thế này?')) return;
+
+    const position = positions.find(p => p.id === positionId);
+    
+    if (position) {
+      // Tính PnL
+      const currentPrice = position.symbol === symbol && lastPrice 
+        ? lastPrice 
+        : position.markPrice;
+      const priceDiff = position.side === 'LONG' 
+        ? currentPrice - position.entryPrice 
+        : position.entryPrice - currentPrice;
+      const realizedPnL = priceDiff * position.size * position.leverage;
       
-      if (position) {
-        // Tính PnL
-        const currentPrice = position.symbol === symbol && lastPrice 
-          ? lastPrice 
-          : position.markPrice;
-        const priceDiff = position.side === 'LONG' 
-          ? currentPrice - position.entryPrice 
-          : position.entryPrice - currentPrice;
-        const realizedPnL = priceDiff * position.size * position.leverage;
+      // Hoàn trả margin + PnL về ví
+      const returnAmount = position.margin + realizedPnL;
+      
+      // Cập nhật ví (cần lấy từ localStorage)
+      const savedWallet = localStorage.getItem('walletData');
+      if (savedWallet) {
+        const walletData = JSON.parse(savedWallet);
+        const quoteAsset = position.symbol.includes('USDT') ? 'USDT' : 'BUSD';
         
-        // Hoàn trả margin + PnL về ví
-        const returnAmount = position.margin + realizedPnL;
-        
-        console.log('Close Position Details:', {
-          symbol: position.symbol,
-          side: position.side,
-          entryPrice: position.entryPrice,
-          currentPrice,
-          priceDiff,
-          size: position.size,
-          leverage: position.leverage,
-          margin: position.margin,
-          realizedPnL,
-          returnAmount
+        const updatedWallet = walletData.map((asset: any) => {
+          if (asset.coin === quoteAsset) {
+            const newAvailable = (asset.available || 0) + returnAmount;
+            const newLocked = Math.max((asset.locked || 0) - position.margin, 0);
+            const newTotal = (asset.total || 0) + realizedPnL;
+            
+            return {
+              coin: asset.coin,
+              available: newAvailable,
+              locked: newLocked,
+              total: newTotal,
+              usdValue: asset.usdValue || 0
+            };
+          }
+          return asset;
         });
         
-        // Cập nhật ví (cần lấy từ localStorage)
-        const savedWallet = localStorage.getItem('walletData');
-        if (savedWallet) {
-          const walletData = JSON.parse(savedWallet);
-          const quoteAsset = position.symbol.includes('USDT') ? 'USDT' : 'BUSD';
-          
-          console.log('Wallet before close:', walletData);
-          
-          const updatedWallet = walletData.map((asset: any) => {
-            if (asset.coin === quoteAsset) {
-              const newAvailable = (asset.available || 0) + returnAmount;
-              const newLocked = Math.max((asset.locked || 0) - position.margin, 0);
-              const newTotal = (asset.total || 0) + realizedPnL;
-              
-              console.log(`Update ${quoteAsset}:`, {
-                oldAvailable: asset.available,
-                addReturn: returnAmount,
-                newAvailable,
-                oldLocked: asset.locked,
-                removeMargin: position.margin,
-                newLocked,
-                oldTotal: asset.total,
-                addPnL: realizedPnL,
-                newTotal
-              });
-              
-              return {
-                coin: asset.coin,
-                available: newAvailable,
-                locked: newLocked,
-                total: newTotal,
-                usdValue: asset.usdValue || 0
-              };
-            }
-            return asset;
-          });
-          
-          console.log('Wallet after close:', updatedWallet);
-          localStorage.setItem('walletData', JSON.stringify(updatedWallet));
-          
-          // Trigger window event để các component khác cập nhật
-          window.dispatchEvent(new Event('walletUpdated'));
-        }
-        
-        contextClosePosition(positionId);
-        
-        alert(`✅ Đã đóng vị thế thành công!\nPnL: ${realizedPnL >= 0 ? '+' : ''}${realizedPnL.toFixed(2)} USDT\nHoàn trả: ${returnAmount.toFixed(2)} USDT`);
+        localStorage.setItem('walletData', JSON.stringify(updatedWallet));
+        window.dispatchEvent(new Event('walletUpdated'));
       }
+      
+      contextClosePosition(positionId);
+      
+      alert(`✅ Đã đóng vị thế thành công!\nPnL: ${realizedPnL >= 0 ? '+' : ''}${realizedPnL.toFixed(2)} USDT\nHoàn trả: ${returnAmount.toFixed(2)} USDT`);
     }
   };
 
@@ -142,83 +156,82 @@ const TradesPanel: React.FC = () => {
     <div style={panelStyle}>
       <div style={{ display: 'flex', marginBottom: '1rem', gap: '0.5rem' }}>
         <h3 style={{ margin: 0, flex: 1 }}>
-          {isFutures ? (activeTab === 'positions' ? 'Vị thế' : 'Lệnh gần đây') : 'Recent Trades'}
+          {isFutures ? 'Vị thế đang mở' : 'Recent Trades'}
         </h3>
       </div>
 
       {/* Tabs - Only show for Futures */}
       {isFutures && (
         <div style={{ display: 'flex', marginBottom: '1rem', borderBottom: '1px solid #2a2e39' }}>
-          <button 
-            style={tabStyle(activeTab === 'trades')}
-            onClick={() => setActiveTab('trades')}
-          >
-            Lệnh gần đây
-          </button>
-          <button 
-            style={tabStyle(activeTab === 'positions')}
+          <button
             onClick={() => setActiveTab('positions')}
+            style={tabStyle(activeTab === 'positions')}
           >
-            Vị thế ({positions.length})
+            Vị thế
+          </button>
+          <button
+            onClick={() => setActiveTab('orders')}
+            style={tabStyle(activeTab === 'orders')}
+          >
+            Lệnh chờ
           </button>
         </div>
       )}
 
       {/* Content */}
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0, overflowX: 'hidden' }}>
-        {(!isFutures || activeTab === 'trades') ? (
-          // Trades Table
-          <table style={{width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem'}}>
-            <thead>
-              <tr style={{textAlign: 'left', color: '#888', borderBottom: '1px solid #2a2e39'}}>
-                <th style={{padding: '0.5rem', fontWeight: 500}}>Thời gian</th>
-                <th style={{padding: '0.5rem', fontWeight: 500}}>Phía</th>
-                <th style={{padding: '0.5rem', textAlign: 'right', fontWeight: 500}}>Giá</th>
-                <th style={{padding: '0.5rem', textAlign: 'right', fontWeight: 500}}>Số lượng</th>
-              </tr>
-            </thead>
-            <tbody>
-              {trades.slice(0, 50).map(trade => (
-                <tr key={trade.id} style={{borderBottom: '1px solid #2a2e39'}}>
-                  <td style={{padding: '0.5rem', color: '#888'}}>
-                    {new Date(trade.timestamp).toLocaleTimeString()}
-                  </td>
-                  <td style={{ 
-                    color: trade.side === 'buy' ? '#26a69a' : '#ef5350', 
-                    padding: '0.5rem',
-                    fontWeight: 600
-                  }}>
-                    {trade.side.toUpperCase()}
-                  </td>
-                  <td style={{textAlign: 'right', padding: '0.5rem', color: '#d1d4dc'}}>
-                    {trade.price.toFixed(2)}
-                  </td>
-                  <td style={{textAlign: 'right', padding: '0.5rem', color: '#d1d4dc'}}>
-                    {trade.quantity.toFixed(4)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          // Positions List (Futures only)
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            gap: '0.75rem',
-            paddingRight: '0.25rem' // Space for scrollbar
-          }}>
-            {positions.length === 0 ? (
-              <div style={{ 
-                textAlign: 'center', 
-                padding: '2rem', 
-                color: '#888',
-                fontSize: '0.9rem'
-              }}>
-                Không có vị thế nào đang mở
+        {/* Show Trades or Positions based on isFutures */}
+        {!isFutures ? (
+          <>
+            {loadingTrades ? (
+              <div style={{ textAlign: 'center', padding: '1rem', color: '#888' }}>
+                ⏳ Đang tải...
+              </div>
+            ) : apiTrades.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '1rem', color: '#888' }}>
+                Không có lệnh gần đây
               </div>
             ) : (
-              positions.map(position => {
+              <table style={{width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem'}}>
+                <thead>
+                  <tr style={{textAlign: 'left', color: '#888', borderBottom: '1px solid #2a2e39'}}>
+                    <th style={{padding: '0.5rem', fontWeight: 500}}>Thời gian</th>
+                    <th style={{padding: '0.5rem', fontWeight: 500}}>Phía</th>
+                    <th style={{padding: '0.5rem', textAlign: 'right', fontWeight: 500}}>Giá</th>
+                    <th style={{padding: '0.5rem', textAlign: 'right', fontWeight: 500}}>Số lượng</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {apiTrades.map(trade => (
+                    <tr key={trade.id} style={{borderBottom: '1px solid #2a2e39'}}>
+                      <td style={{padding: '0.5rem', color: '#888'}}>
+                        {new Date(trade.created_at).toLocaleTimeString()}
+                      </td>
+                      <td style={{ 
+                        color: trade.side === 'BUY' ? '#26a69a' : '#ef5350', 
+                        padding: '0.5rem',
+                        fontWeight: 600
+                      }}>
+                        {trade.side}
+                      </td>
+                      <td style={{textAlign: 'right', padding: '0.5rem', color: '#d1d4dc'}}>
+                        {trade.price?.toFixed(2) || 'N/A'}
+                      </td>
+                      <td style={{textAlign: 'right', padding: '0.5rem', color: '#d1d4dc'}}>
+                        {trade.quantity?.toFixed(4) || 'N/A'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </>
+        ) : (
+          <>
+            {/* Tab: Vị thế */}
+            {activeTab === 'positions' && (
+              <>
+                {positions.length > 0 ? positions.map(position => {
                 // Tính PnL động dựa trên giá hiện tại từ biểu đồ
                 // Chỉ dùng lastPrice nếu position symbol trùng với symbol đang xem
                 const currentPrice = position.symbol === symbol && lastPrice 
@@ -553,9 +566,31 @@ const TradesPanel: React.FC = () => {
                   </div>
                 </div>
               );
-              })
+            }) : (
+              <div style={{ 
+                textAlign: 'center', 
+                color: '#888', 
+                padding: '2rem',
+                fontSize: '0.9rem'
+              }}>
+                Không có vị thế nào
+              </div>
             )}
-          </div>
+          </>
+        )}
+
+            {/* Tab: Lệnh chờ */}
+            {activeTab === 'orders' && (
+              <div style={{ 
+                textAlign: 'center', 
+                padding: '2rem', 
+                color: '#888',
+                fontSize: '0.9rem'
+              }}>
+                Không có lệnh chờ nào
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

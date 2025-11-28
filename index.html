@@ -40,7 +40,7 @@
                 </nav>
             </div>
             <div class="sidebar-bottom">
-                 <a href="login.html" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Đăng xuất</span></a>
+                 <a href="login.html" class="nav-link" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Đăng xuất</span></a>
             </div>
         </aside>
 
@@ -54,7 +54,7 @@
                 <div class="header-actions">
                     <div class="search-bar">
                         <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                        <input type="text" placeholder="Tìm kiếm coin...">
+                        <input type="text" placeholder="Tìm kiếm coin..." id="dashboard-search-coin">
                     </div>
                     <button class="btn-icon">
                         <i class="fa-solid fa-bell" aria-hidden="true"></i>
@@ -241,7 +241,7 @@
 
     <!-- Bootstrap JS (optional, for components that need it) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- Custom JS - Giả sử /dashboard/index.tsx là file chính -->
+    <!-- Load Dashboard -->
     <script type="module" src="./dashboard/index.tsx"></script>
 </body>
 </html>

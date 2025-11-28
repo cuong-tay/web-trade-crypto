@@ -1,18 +1,30 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { setupProtectedPage, setupLogoutButton } from '../utils/authGuard';
+import ChatbotPanel from '../components/chatbot/ChatbotPanel';
 
-// const Chatbot = () => {
-//     return (
-//         <div className="chatbot-placeholder">
-//             <h1>Chatbot Interface</h1>
-//             <p>The chatbot functionality will be implemented here.</p>
-//         </div>
-//     );
-// };
-
-// const root = ReactDOM.createRoot(document.getElementById('chatbot-view') as HTMLElement);
-// root.render(
-//     <React.StrictMode>
-//         <Chatbot />
-//     </React.StrictMode>
-// );
+// Chatbot module
+(async () => {
+  // Setup auth guard first
+  const user = setupProtectedPage();
+  
+  if (!user) {
+    console.error('❌ Chatbot requires authentication');
+    return;
+  }
+  
+  console.log('🤖 Chatbot loaded for user:', user.username);
+  
+  // Setup logout button
+  setupLogoutButton('#logout-btn');
+  
+  // Render ChatbotPanel component
+  const root = ReactDOM.createRoot(document.getElementById('chatbot-view') as HTMLElement);
+  root.render(
+    <React.StrictMode>
+      <ChatbotPanel />
+    </React.StrictMode>
+  );
+  
+  console.log('✅ Chatbot UI rendered successfully');
+})();

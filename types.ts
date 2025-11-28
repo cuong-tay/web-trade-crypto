@@ -64,6 +64,7 @@ export interface TradingState {
   positions: Position[];
   balance: number;
   lastPrice: number;
+  lastChartTime: number; // Thời gian từ chart WebSocket (UTC+0)
 }
 
 export interface TradingContextType extends TradingState {
@@ -75,4 +76,18 @@ export interface TradingContextType extends TradingState {
   closePosition: (positionId: string) => void;
   updatePositionTPSL: (positionId: string, takeProfit?: number, stopLoss?: number) => void;
   setLastPrice: (price: number) => void;
+  setLastChartTime: (time: number) => void;
+}
+
+export interface Transaction {
+  id: string;
+  user_id: string;
+  wallet_id: string;
+  type: string;
+  currency: string;
+  amount: string;
+  fee: string;
+  balance_after: string;
+  created_at: string;
+  metadata?: Record<string, any>;
 }

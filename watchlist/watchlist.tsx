@@ -4,6 +4,10 @@ import {
   removeFromWatchlist,
   showNotification,
 } from './watchlistManager';
+import { setupProtectedPage, setupLogoutButton, getCurrentUser } from '../utils/authGuard';
+
+// Auth setup
+let currentUser = getCurrentUser();
 
 // DOM Elements
 const emptyState = document.getElementById('empty-state')!;
@@ -26,6 +30,18 @@ let filteredData: any[] = [];
 
 // Initialize
 async function init() {
+  // Setup auth guard first
+  currentUser = setupProtectedPage();
+  
+  if (!currentUser) {
+    return;
+  }
+  
+  console.log('👀 Watchlist loaded for user:', currentUser.username);
+  
+  // Setup logout button
+  setupLogoutButton('#logout-btn');
+  
   const symbols = getWatchlist();
   
   if (symbols.length === 0) {

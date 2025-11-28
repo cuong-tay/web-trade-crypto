@@ -19,14 +19,18 @@ const BINANCE_API_URL = 'https://api.binance.com/api/v3/ticker/24hr';
  */
 export const loadCryptoData = async (): Promise<BinanceCoin[] | null> => {
     try {
+        console.log('🔄 Fetching Binance API:', BINANCE_API_URL);
         const response = await fetch(BINANCE_API_URL);
+        console.log('📡 Binance Response Status:', response.status);
+        
         if (!response.ok) {
-            console.error(`Lỗi API Binance: ${response.status}`);
+            console.error(`❌ Binance API Error: ${response.status}`);
             return null;
         }
         
         // API của Binance trả về một mảng các đối tượng
         const allCoins: BinanceCoin[] = await response.json();
+        console.log('✅ Received coins from Binance:', allCoins.length);
 
         // Lọc các cặp giao dịch với USDT và có khối lượng giao dịch đáng kể
         const usdtPairs = allCoins.filter(coin => 
@@ -34,10 +38,11 @@ export const loadCryptoData = async (): Promise<BinanceCoin[] | null> => {
             parseFloat(coin.quoteVolume) > 100000
         );
 
+        console.log('✅ Filtered USDT pairs:', usdtPairs.length);
         return usdtPairs;
 
     } catch (error) {
-        console.error("Không thể tải dữ liệu crypto:", error);
+        console.error("❌ Failed to load crypto data:", error);
         return null;
     }
 };

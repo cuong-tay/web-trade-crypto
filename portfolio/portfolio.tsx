@@ -1,8 +1,14 @@
 import { loadCryptoData, BinanceCoin } from '../dashboard/api';
+import { setupProtectedPage, setupLogoutButton, getCurrentUser } from '../utils/authGuard';
+import { TradingService, type Position } from '../services/tradingService';
+
+// --- Auth Setup ---
+let currentUser = getCurrentUser();
 
 // --- Types ---
 interface Transaction {
     id: string;
+    userId: string;
     type: 'buy' | 'sell';
     coin: string;
     amount: number;
@@ -48,22 +54,26 @@ const getIconFallbackChain = (baseAsset: string, size: number = 32) => {
 };
 
 // --- Local Storage Functions ---
-const STORAGE_KEY = 'crypto_portfolio_transactions';
+const STORAGE_KEY = (userId: string) => `crypto_portfolio_${userId}`;
 
 const getTransactions = (): Transaction[] => {
-    const data = localStorage.getItem(STORAGE_KEY);
+    if (!currentUser) return [];
+    const data = localStorage.getItem(STORAGE_KEY(currentUser.id));
     return data ? JSON.parse(data) : [];
 };
 
 const saveTransactions = (transactions: Transaction[]) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
+    if (!currentUser) return;
+    localStorage.setItem(STORAGE_KEY(currentUser.id), JSON.stringify(transactions));
 };
 
-const addTransaction = (transaction: Omit<Transaction, 'id'>) => {
+const addTransaction = (transaction: Omit<Transaction, 'id' | 'userId'>) => {
+    if (!currentUser) return null;
     const transactions = getTransactions();
     const newTransaction: Transaction = {
         ...transaction,
         id: Date.now().toString(),
+        userId: currentUser.id,
     };
     transactions.push(newTransaction);
     saveTransactions(transactions);
@@ -129,6 +139,55 @@ const calculateHoldings = (transactions: Transaction[], priceData: Map<string, n
     });
 
     return holdings.sort((a, b) => b.totalValue - a.totalValue);
+};
+
+// --- API Functions ---
+const fetchHoldingsFromAPI = async (priceData: Map<string, number>): Promise<Holding[]> => {
+    try {
+        console.log('📊 Fetching holdings from API...');
+        const positions = await TradingService.getPositions();
+        console.log('✅ Positions from API:', positions);
+        
+        if (!positions || positions.length === 0) {
+            console.log('ℹ️ No positions found from API, using local transactions');
+            const transactions = getTransactions();
+            return calculateHoldings(transactions, priceData);
+        }
+        
+        // Convert API Position to Holding
+        const holdings: Holding[] = positions.map(pos => {
+            const baseAsset = pos.symbol.replace('USDT', '').replace('BUSD', '');
+            const currentPrice = priceData.get(baseAsset) || 0;
+            const totalValue = pos.quantity * currentPrice;
+            const totalCost = pos.quantity * pos.average_price;
+            const pnl = totalValue - totalCost;
+            const pnlPercentage = totalCost > 0 ? (pnl / totalCost) * 100 : 0;
+            
+            return {
+                coin: baseAsset,
+                amount: pos.quantity,
+                avgPrice: pos.average_price,
+                currentPrice,
+                totalValue,
+                pnl,
+                pnlPercentage,
+                portfolioPercentage: 0, // Will calculate after
+            };
+        });
+        
+        // Calculate portfolio percentages
+        const totalPortfolioValue = holdings.reduce((sum, h) => sum + h.totalValue, 0);
+        holdings.forEach(holding => {
+            holding.portfolioPercentage = totalPortfolioValue > 0 ? (holding.totalValue / totalPortfolioValue) * 100 : 0;
+        });
+        
+        return holdings.sort((a, b) => b.totalValue - a.totalValue);
+    } catch (error) {
+        console.error('❌ Error fetching holdings from API:', error);
+        // Fallback to local transactions
+        const transactions = getTransactions();
+        return calculateHoldings(transactions, priceData);
+    }
 };
 
 // --- Render Functions ---
@@ -335,9 +394,11 @@ const initPortfolio = async () => {
             });
         }
 
-        // Calculate holdings
+        // Fetch holdings từ API (sẽ fallback to local nếu API fail)
+        const holdings = await fetchHoldingsFromAPI(priceMap);
+
+        // Get local transactions for history display
         const transactions = getTransactions();
-        const holdings = calculateHoldings(transactions, priceMap);
 
         // Render everything
         renderSummary(holdings);
@@ -351,7 +412,19 @@ const initPortfolio = async () => {
 };
 
 // --- Event Listeners ---
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Setup auth guard first
+    currentUser = setupProtectedPage();
+    
+    if (!currentUser) {
+        return;
+    }
+    
+    console.log('📊 Portfolio loaded for user:', currentUser.username);
+    
+    // Setup logout button
+    setupLogoutButton('#logout-btn');
+    
     initPortfolio();
 
     // Filter buttons

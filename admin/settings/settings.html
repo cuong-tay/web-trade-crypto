@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài Đặt Hệ Thống - Admin CTrading</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../styles/admin.css">
+</head>
+<body>
+
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                        <path d="M16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16C0 7.16344 7.16344 0 16 0Z" fill="#30D475"></path>
+                        <path d="M19.8623 10.1377L15.9999 18.0628L12.1375 10.1377L4 12.086L15.9999 28L28 12.086L19.8623 10.1377Z" fill="white"></path>
+                    </svg>
+                    <span>CTrading Admin</span>
+                </div>
+                <nav class="admin-nav">
+                    <a href="../admin-dashboard.html" class="nav-link">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="../users/user-management.html" class="nav-link">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Quản Lí User</span>
+                    </a>
+                    <a href="../transactions/transaction-management.html" class="nav-link">
+                        <i class="fa-solid fa-receipt"></i>
+                        <span>Quản Lí Giao Dịch</span>
+                    </a>
+                    <a href="../reports/reports.html" class="nav-link">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Báo Cáo & Thống Kê</span>
+                    </a>
+                    <a href="settings.html" class="nav-link active">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Cài Đặt Hệ Thống</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                <a href="../../index.html" class="nav-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Về Dashboard User</span>
+                </a>
+                <a href="../../login.html" class="nav-link" id="logout-btn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1><i class="fa-solid fa-gear me-2"></i> Cài Đặt Hệ Thống</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn-icon">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <div class="admin-profile">
+                        <img src="https://i.pravatar.cc/40?u=admin" alt="Admin">
+                        <div class="profile-info">
+                            <p class="profile-name" id="admin-name">Admin</p>
+                            <small>Administrator</small>
+                        </div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Admin Content -->
+            <main class="admin-content">
+                <!-- Settings Tabs -->
+                <ul class="nav nav-tabs mb-4" id="settingsTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button">
+                            <i class="fa-solid fa-sliders me-2"></i>General
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="trading-tab" data-bs-toggle="tab" data-bs-target="#trading" type="button">
+                            <i class="fa-solid fa-chart-line me-2"></i>Trading Settings
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="fees-tab" data-bs-toggle="tab" data-bs-target="#fees" type="button">
+                            <i class="fa-solid fa-coins me-2"></i>Fees & Commissions
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button">
+                            <i class="fa-solid fa-shield me-2"></i>Security
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button">
+                            <i class="fa-solid fa-bell me-2"></i>Notifications
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="settingsTabContent">
+                    <!-- General Settings -->
+                    <div class="tab-pane fade show active" id="general" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-sliders me-2"></i>General Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="general-settings-form">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Platform Name</label>
+                                            <input type="text" class="form-control" value="CTrading" id="platform-name">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Support Email</label>
+                                            <input type="email" class="form-control" value="support@ctrading.com" id="support-email">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Maintenance Mode</label>
+                                            <select class="form-select" id="maintenance-mode">
+                                                <option value="off">Off</option>
+                                                <option value="on">On</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Default Language</label>
+                                            <select class="form-select" id="default-language">
+                                                <option value="vi" selected>Tiếng Việt</option>
+                                                <option value="en">English</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Platform Description</label>
+                                            <textarea class="form-control" rows="3" id="platform-description">Leading crypto trading platform in Vietnam</textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa-solid fa-save me-2"></i>Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trading Settings -->
+                    <div class="tab-pane fade" id="trading" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-line me-2"></i>Trading Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="trading-settings-form">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Minimum Trade Amount ($)</label>
+                                            <input type="number" class="form-control" value="10" id="min-trade-amount">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Maximum Trade Amount ($)</label>
+                                            <input type="number" class="form-control" value="100000" id="max-trade-amount">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Max Leverage</label>
+                                            <input type="number" class="form-control" value="10" id="max-leverage">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Price Update Interval (seconds)</label>
+                                            <input type="number" class="form-control" value="5" id="price-update-interval">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="enable-stop-loss" checked>
+                                                <label class="form-check-label" for="enable-stop-loss">
+                                                    Enable Stop Loss
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="enable-take-profit" checked>
+                                                <label class="form-check-label" for="enable-take-profit">
+                                                    Enable Take Profit
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa-solid fa-save me-2"></i>Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fees & Commissions -->
+                    <div class="tab-pane fade" id="fees" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-coins me-2"></i>Fees & Commissions</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="fees-settings-form">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Trading Fee (%)</label>
+                                            <input type="number" step="0.01" class="form-control" value="0.2" id="trading-fee">
+                                            <small class="text-muted">Fee per transaction</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Withdrawal Fee ($)</label>
+                                            <input type="number" step="0.01" class="form-control" value="5" id="withdrawal-fee">
+                                            <small class="text-muted">Fixed fee for withdrawals</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Deposit Fee ($)</label>
+                                            <input type="number" step="0.01" class="form-control" value="0" id="deposit-fee">
+                                            <small class="text-muted">Fixed fee for deposits</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">VIP User Discount (%)</label>
+                                            <input type="number" step="0.01" class="form-control" value="50" id="vip-discount">
+                                            <small class="text-muted">Discount for VIP users</small>
+                                        </div>
+                                        <div class="col-12">
+                                            <h5 class="mt-3">Fee Tiers (Based on Monthly Volume)</h5>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Volume Range ($)</th>
+                                                        <th>Fee (%)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>0 - 10,000</td>
+                                                        <td><input type="number" step="0.01" class="form-control form-control-sm" value="0.2"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>10,000 - 50,000</td>
+                                                        <td><input type="number" step="0.01" class="form-control form-control-sm" value="0.15"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>50,000 - 100,000</td>
+                                                        <td><input type="number" step="0.01" class="form-control form-control-sm" value="0.1"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>100,000+</td>
+                                                        <td><input type="number" step="0.01" class="form-control form-control-sm" value="0.05"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa-solid fa-save me-2"></i>Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="tab-pane fade" id="security" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-shield me-2"></i>Security Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="security-settings-form">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Session Timeout (minutes)</label>
+                                            <input type="number" class="form-control" value="30" id="session-timeout">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Max Login Attempts</label>
+                                            <input type="number" class="form-control" value="5" id="max-login-attempts">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Password Min Length</label>
+                                            <input type="number" class="form-control" value="8" id="password-min-length">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">IP Whitelist Mode</label>
+                                            <select class="form-select" id="ip-whitelist-mode">
+                                                <option value="off">Off</option>
+                                                <option value="on">On</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="enable-2fa" checked>
+                                                <label class="form-check-label" for="enable-2fa">
+                                                    Enable Two-Factor Authentication (2FA)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="require-email-verification" checked>
+                                                <label class="form-check-label" for="require-email-verification">
+                                                    Require Email Verification
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="enable-captcha">
+                                                <label class="form-check-label" for="enable-captcha">
+                                                    Enable CAPTCHA on Login
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa-solid fa-save me-2"></i>Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Settings -->
+                    <div class="tab-pane fade" id="notifications" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-bell me-2"></i>Notification Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="notifications-settings-form">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <h5>Email Notifications</h5>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="notify-new-user" checked>
+                                                <label class="form-check-label" for="notify-new-user">
+                                                    New User Registration
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="notify-large-trade" checked>
+                                                <label class="form-check-label" for="notify-large-trade">
+                                                    Large Trades (>$10,000)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="notify-withdrawal">
+                                                <label class="form-check-label" for="notify-withdrawal">
+                                                    Withdrawal Requests
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="notify-suspicious">
+                                                <label class="form-check-label" for="notify-suspicious">
+                                                    Suspicious Activity
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-4">
+                                            <h5>Admin Alert Recipients</h5>
+                                            <textarea class="form-control" rows="3" id="admin-emails" placeholder="admin1@ctrading.com, admin2@ctrading.com">admin@ctrading.com</textarea>
+                                            <small class="text-muted">Comma-separated email addresses</small>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa-solid fa-save me-2"></i>Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="card border-danger mt-4">
+                    <div class="card-header bg-danger text-white">
+                        <h3 class="mb-0"><i class="fa-solid fa-triangle-exclamation me-2"></i>Danger Zone</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h5>Clear All Cache</h5>
+                                <p class="mb-0 text-muted">Clear all cached data from the system</p>
+                            </div>
+                            <button class="btn btn-outline-danger" id="clear-cache-btn">
+                                <i class="fa-solid fa-trash me-2"></i>Clear Cache
+                            </button>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5>Reset All Settings</h5>
+                                <p class="mb-0 text-muted">Reset all settings to default values</p>
+                            </div>
+                            <button class="btn btn-danger" id="reset-settings-btn">
+                                <i class="fa-solid fa-rotate-left me-2"></i>Reset Settings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Settings Script -->
+    <script type="module" src="./settings.tsx"></script>
+</body>
+</html>

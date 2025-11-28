@@ -13,6 +13,7 @@ export const useTradingState = () => {
   const [positions, setPositions] = useState<Position[]>([]);
   const [balance, setBalance] = useState(10000); // Start with 10000 USDT
   const [lastPrice, setLastPrice] = useState(0);
+  const [lastChartTime, setLastChartTime] = useState<number>(0); // Thời gian từ chart WebSocket
 
   const placeOrder = useCallback((order: { symbol: Symbol; price: number; quantity: number; side: OrderSide; type: OrderType; }) => {
     const newOrder: Order = {
@@ -84,5 +85,7 @@ export const useTradingState = () => {
     updatePositionTPSL,
     lastPrice,
     setLastPrice,
+    lastChartTime,
+    setLastChartTime,
   };
 };
